@@ -1,0 +1,22 @@
+{
+  "name": "curso-api-rest-moviedb-jk",
+  "version": "1.0.0",
+  "description": "Curso Práctico de java script API REST",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JRIOS1230/curso-api-rest-movieDb-jk.git"
+  },
+  "keywords": [
+    "@juanr"
+  ],
+  "author": "@juanr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JRIOS1230/curso-api-rest-movieDb-jk/issues"
+  },
+  "homepage": "https://github.com/JRIOS1230/curso-api-rest-movieDb-jk#readme"
+}
