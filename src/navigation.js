@@ -52,6 +52,7 @@ function homePage() {
 }
 
 function categoriesPage() {
+  window.scroll(0,0);
   console.log('categories!!');
 
   headerSection.classList.remove('header-container--long');
@@ -66,6 +67,18 @@ function categoriesPage() {
   categoriesPreviewSection.classList.add('inactive');
   genericSection.classList.remove('inactive')
   movieDetailSection.classList.add('inactive')
+
+  //para mandarle el id y es pueda filtrar la categoria y mande los id correspondientes a esta categoria, se hara una manipulación de conversión 
+  //de strings en arrays, se hace de la siguiente manera:
+
+  const [_, categoryDataId] = location.hash.split('=') //resultado esperado:  ['#category', 'id-name']
+  const [categoryId, categoryName] = categoryDataId.split('-')
+
+  //en esta parte volveremos el titulo de la categoria dinamico, gracias al innerHTML y al node que tenemos de encabezado de categoria
+  headerCategoryTitle.innerHTML = categoryName
+
+  getMoviesByCategory(categoryId)
+
 }
 
 function movieDetailsPage() {

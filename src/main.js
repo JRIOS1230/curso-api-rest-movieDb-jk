@@ -8,15 +8,13 @@ const api = axios.create({
   },
 });
 
-async function getTrendingMoviesPreview() {
-  const { data } = await api('trending/movie/day');
-  const movies = data.results;
+//utils funcion de creación de peliculas y su respectivo contenedor
 
-  trendingMoviesPreviewList.innerHTML = "";
+function createMovies(movies, container){
+  container.innerHTML='';
 
   movies.forEach(movie => {
-    const trendingPreviewMoviesContainer = document.querySelector('#trendingPreview .trendingPreview-movieList')
-    
+     
     const movieContainer = document.createElement('div');
     movieContainer.classList.add('movie-container');
 
@@ -29,19 +27,16 @@ async function getTrendingMoviesPreview() {
     );
 
     movieContainer.appendChild(movieImg);
-    trendingPreviewMoviesContainer.appendChild(movieContainer);
+    container.appendChild(movieContainer);
   });
+
 }
 
-async function getCategegoriesPreview() {
-  const { data } = await api('genre/movie/list');
-  const categories = data.genres;
-
-  categoriesPreviewList.innerHTML = "";
+function createCategories (categories, container){
+  container.innerHTML='';
 
   categories.forEach(category => {
-    const previewCategoriesContainer = document.querySelector('#categoriesPreview .categoriesPreview-list')
-    
+       
     const categoryContainer = document.createElement('div');
     categoryContainer.classList.add('category-container');
 
@@ -55,6 +50,32 @@ async function getCategegoriesPreview() {
 
     categoryTitle.appendChild(categoryTitleText);
     categoryContainer.appendChild(categoryTitle);
-    previewCategoriesContainer.appendChild(categoryContainer);
+    container.appendChild(categoryContainer);
   });
+}
+
+async function getTrendingMoviesPreview() {
+  const { data } = await api('trending/movie/day');
+  const movies = data.results;
+
+  createMovies(movies, trendingMoviesPreviewList);
+}
+
+async function getCategegoriesPreview() {
+  const { data } = await api('genre/movie/list');
+  const categories = data.genres;
+
+  //categoriesPreviewList
+  createCategories(categories, categoriesPreviewList)
+}
+
+async function getMoviesByCategory(id) {
+  const { data } = await api('discover/movie', {
+    params: {
+      with_genres: id
+    }
+  });
+  const movies = data.results;
+
+  createMovies(movies, genericSection);
 }
